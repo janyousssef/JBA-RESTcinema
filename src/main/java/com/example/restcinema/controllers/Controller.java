@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController()
 public class Controller {
     @GetMapping("/seats")
-    public ResponseEntity web() {
+    public ResponseEntity<Cinema> web() {
         Logger logger = LoggerFactory.getLogger(Controller.class);
         logger.info("controller called");
-        return new ResponseEntity(new Cinema(), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(new Cinema(), HttpStatusCode.valueOf(200));
     }
 }
