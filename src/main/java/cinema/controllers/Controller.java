@@ -1,9 +1,9 @@
-package com.example.restcinema.controllers;
+package cinema.controllers;
 
-import com.example.restcinema.models.Cinema;
+import cinema.models.Cinema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +14,6 @@ public class Controller {
     public ResponseEntity<Cinema> web() {
         Logger logger = LoggerFactory.getLogger(Controller.class);
         logger.info("controller called");
-        return new ResponseEntity<>(new Cinema(), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(new Cinema(), HttpStatus.OK);
     }
 }

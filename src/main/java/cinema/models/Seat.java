@@ -1,4 +1,4 @@
-package com.example.restcinema.models;
+package cinema.models;
 
 public record Seat(Integer row, Integer column) {
 }

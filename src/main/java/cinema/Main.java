@@ -1,13 +1,13 @@
-package com.example.restcinema;
+package cinema;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ResTcinemaApplication {
+public class Main {
 
     public static void main(String[] args) {
-        SpringApplication.run(ResTcinemaApplication.class, args);
+        SpringApplication.run(Main.class, args);
     }
 
 }
