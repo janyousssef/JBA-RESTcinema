@@ -1,4 +1,4 @@
-package com.example.restcinema.models;
+package cinema.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -10,7 +10,7 @@ public class Cinema {
     @JsonProperty("total_columns")
     private final Integer TOTAL_COLUMNS = 9;
     @JsonProperty("available_seats")
-    Seat[] availableSeats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
+    private final Seat[] availableSeats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
 
     public Cinema() {
         for (int i = 0; i < 9; i++) {
@@ -20,16 +20,5 @@ public class Cinema {
         }
     }
 
-    public Integer getTOTAL_ROWS() {
-        return TOTAL_ROWS;
-    }
-
-    public Integer getTOTAL_COLUMNS() {
-        return TOTAL_COLUMNS;
-    }
-
-    public Seat[] getAvailableSeats() {
-        return availableSeats;
-    }
 
 }
