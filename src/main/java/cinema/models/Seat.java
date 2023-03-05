@@ -1,4 +1,6 @@
 package cinema.models;
 
-public record Seat(Integer row, Integer column,Long price) {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public record Seat(Integer row, Integer column, Long price, @JsonIgnore boolean isReserved) {
 }

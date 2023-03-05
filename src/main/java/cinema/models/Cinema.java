@@ -25,9 +25,9 @@ public class Cinema {
             for (int col = 0; col < 9; col++) {
                 Seat seat;
                 if (row < 4)
-                    seat = new Seat(row + 1, col + 1, 10L);
+                    seat = new Seat(row + 1, col + 1, 10L,false);
                 else
-                    seat = new Seat(row + 1, col + 1, 8L);
+                    seat = new Seat(row + 1, col + 1, 8L,false);
 
                 availableSeats[row * TOTAL_ROWS + col] = seat;
             }
