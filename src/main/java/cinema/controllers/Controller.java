@@ -14,6 +14,6 @@ public class Controller {
     public ResponseEntity<Cinema> web() {
         Logger logger = LoggerFactory.getLogger(Controller.class);
         logger.info("controller called");
-        return new ResponseEntity<>(new Cinema(), HttpStatus.OK);
+        return new ResponseEntity<>(new Cinema(9,9), HttpStatus.OK);
     }
 }

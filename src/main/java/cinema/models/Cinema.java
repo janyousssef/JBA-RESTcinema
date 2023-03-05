@@ -6,13 +6,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder(value = {"total_rows", "total_columns", "available_seats"})
 public class Cinema {
     @JsonProperty("total_rows")
-    private final Integer TOTAL_ROWS = 9;
+    private final Integer TOTAL_ROWS;
     @JsonProperty("total_columns")
-    private final Integer TOTAL_COLUMNS = 9;
+    private final Integer TOTAL_COLUMNS;
     @JsonProperty("available_seats")
-    private final Seat[] availableSeats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
+    private final Seat[] availableSeats;
 
-    public Cinema() {
+
+    public Cinema(Integer TOTAL_ROWS, Integer TOTAL_COLUMNS) {
+        this.TOTAL_ROWS = TOTAL_ROWS;
+        this.TOTAL_COLUMNS = TOTAL_COLUMNS;
+        this.availableSeats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
+        initializeSeats();
+    }
+
+    private void initializeSeats() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 Seat seat;
@@ -25,6 +33,7 @@ public class Cinema {
             }
         }
     }
+
 
 
 }
