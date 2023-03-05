@@ -34,6 +34,10 @@ public class Cinema {
         }
     }
 
-
+    public Seat getSeat(Integer row,Integer col){
+        row--;
+        col--;
+        return availableSeats[row * TOTAL_ROWS + col];
+    }
 
 }
