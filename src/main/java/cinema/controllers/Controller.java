@@ -4,10 +4,8 @@ import cinema.errors.SeatPurchaseProblem;
 import cinema.models.Cinema;
 import cinema.models.Seat;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController()
 public class Controller {
@@ -27,12 +25,12 @@ public class Controller {
     @PostMapping("/purchase")
     public ResponseEntity purchase(@RequestBody Seat seat) {
 
-        if(seat.invalidInstance())
-            return new ResponseEntity<>(new SeatPurchaseProblem("The number of a row or a column is out of bounds!"),HttpStatus.BAD_REQUEST);
+        if (seat.invalidInstance())
+            return new ResponseEntity<>(new SeatPurchaseProblem("The number of a row or a column is out of bounds!"), HttpStatus.BAD_REQUEST);
 
         seat = cinema.getSeat(seat.getRow(), seat.getColumn());
         if (seat.isReserved())
-            return new ResponseEntity<>(new SeatPurchaseProblem("The ticket has been already purchased!"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new SeatPurchaseProblem("The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(cinema.reserveSeat(seat), HttpStatus.OK);
 

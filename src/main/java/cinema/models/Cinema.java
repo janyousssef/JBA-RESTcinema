@@ -25,21 +25,22 @@ public class Cinema {
             for (int col = 0; col < 9; col++) {
                 Seat seat;
                 if (row < 4)
-                    seat = new Seat(row + 1, col + 1, 10L,false);
+                    seat = new Seat(row + 1, col + 1, 10L, false);
                 else
-                    seat = new Seat(row + 1, col + 1, 8L,false);
+                    seat = new Seat(row + 1, col + 1, 8L, false);
 
                 availableSeats[row * TOTAL_ROWS + col] = seat;
             }
         }
     }
 
-    public Seat getSeat(Integer row,Integer col){
+    public Seat getSeat(Integer row, Integer col) {
         row--;
         col--;
         return availableSeats[row * TOTAL_ROWS + col];
     }
-    public Seat reserveSeat(Seat seat){
+
+    public Seat reserveSeat(Seat seat) {
         seat.reserve();
         return seat;
     }
