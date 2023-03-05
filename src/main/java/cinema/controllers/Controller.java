@@ -25,6 +25,9 @@ public class Controller {
     @PostMapping("/purchase")
     public ResponseEntity purchase(@RequestBody Seat seat) {
 
+        if (seat == null || seat.getColumn() == null || seat.getRow() == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         if (seat.invalidInstance())
             return new ResponseEntity<>(new SeatPurchaseProblem("The number of a row or a column is out of bounds!"), HttpStatus.BAD_REQUEST);
 
