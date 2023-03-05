@@ -1,12 +1,13 @@
 package cinema.controllers;
 
+import cinema.errors.SeatPurchaseProblem;
 import cinema.models.Cinema;
 import cinema.models.Seat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController()
 public class Controller {
@@ -18,8 +19,23 @@ public class Controller {
     }
 
     @GetMapping("/seat")
-    public ResponseEntity<Seat> getSeatByRowCol(@RequestParam Integer row,@RequestParam Integer col) {
+    public ResponseEntity<Seat> getSeatByRowCol(@RequestParam Integer row, @RequestParam Integer col) {
         Seat seat = cinema.getSeat(row, col);
         return new ResponseEntity<>(seat, HttpStatus.OK);
     }
+
+    @PostMapping("/purchase")
+    public ResponseEntity purchase(@RequestBody Seat seat) {
+
+        if(seat.invalidInstance())
+            return new ResponseEntity<>(new SeatPurchaseProblem("The number of a row or a column is out of bounds!"),HttpStatus.BAD_REQUEST);
+
+        seat = cinema.getSeat(seat.getRow(), seat.getColumn());
+        if (seat.isReserved())
+            return new ResponseEntity<>(new SeatPurchaseProblem("The ticket has been already purchased!"),HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(cinema.reserveSeat(seat), HttpStatus.OK);
+
+    }
+
 }

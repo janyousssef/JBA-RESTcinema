@@ -39,5 +39,8 @@ public class Cinema {
         col--;
         return availableSeats[row * TOTAL_ROWS + col];
     }
-
+    public Seat reserveSeat(Seat seat){
+        seat.reserve();
+        return seat;
+    }
 }
