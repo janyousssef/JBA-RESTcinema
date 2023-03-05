@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 public class Controller {
+    final String INVALID_SEAT = "The number of a row or a column is out of bounds!";
+    final String ALREADY_PURCHASED = "The ticket has been already purchased!";
     Cinema cinema = new Cinema(9, 9);
 
     @GetMapping("/seats")
@@ -25,15 +27,12 @@ public class Controller {
     @PostMapping("/purchase")
     public ResponseEntity purchase(@RequestBody Seat seat) {
 
-        if (seat == null || seat.getColumn() == null || seat.getRow() == null)
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
         if (seat.invalidInstance())
-            return new ResponseEntity<>(new SeatPurchaseProblem("The number of a row or a column is out of bounds!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new SeatPurchaseProblem(INVALID_SEAT), HttpStatus.BAD_REQUEST);
 
         seat = cinema.getSeat(seat.getRow(), seat.getColumn());
         if (seat.isReserved())
-            return new ResponseEntity<>(new SeatPurchaseProblem("The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new SeatPurchaseProblem(ALREADY_PURCHASED), HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(cinema.reserveSeat(seat), HttpStatus.OK);
 

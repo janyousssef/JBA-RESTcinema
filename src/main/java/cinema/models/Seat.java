@@ -48,6 +48,7 @@ public final class Seat {
     public boolean invalidInstance() {
         return row > 9 || column > 9 || row < 1 || column < 1;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;

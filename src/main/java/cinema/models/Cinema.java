@@ -21,13 +21,12 @@ public class Cinema {
     }
 
     private void initializeSeats() {
+        Seat seat;
+
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                Seat seat;
-                if (row < 4)
-                    seat = new Seat(row + 1, col + 1, 10L, false);
-                else
-                    seat = new Seat(row + 1, col + 1, 8L, false);
+                if (row < 4) seat = new Seat(row + 1, col + 1, 10L, false);
+                else seat = new Seat(row + 1, col + 1, 8L, false);
 
                 availableSeats[row * TOTAL_ROWS + col] = seat;
             }
