@@ -28,12 +28,12 @@ public class Controller {
 
     @PostMapping("/purchase")
     public ResponseEntity<Map<String, Object>> purchase(@RequestBody Seat seat) {
-        seat = cinemaService.getSeat(seat);
         if (seat.isInvalidInstance()) {
             String INVALID_SEAT = "The number of a row or a column is out of bounds!";
             return new ResponseEntity<>(Map.of("error", INVALID_SEAT), HttpStatus.BAD_REQUEST);
         }
 
+        seat = cinemaService.getSeat(seat);
         if (seat.isReserved()) {
             String ALREADY_PURCHASED = "The ticket has been already purchased!";
             return new ResponseEntity<>(Map.of("error", ALREADY_PURCHASED), HttpStatus.BAD_REQUEST);
