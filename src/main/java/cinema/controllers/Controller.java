@@ -51,7 +51,7 @@ public class Controller {
 
         if (cinemaService.seatIsNotPurchased(id))
             return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<Map<String, Object>>(Map.of("returned ticket", cinemaService.returnSeat(id)), HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("returned ticket", cinemaService.returnSeat(id)), HttpStatus.OK);
 
     }
 
