@@ -60,7 +60,11 @@ public class Controller {
     }
 
     private UUID getUUIDFromJSON(String token) {
-        return UUID.fromString(token.substring(token.indexOf(": ") + 3, token.lastIndexOf("\"")));
+        int beginIndex = token.indexOf("\"", token.indexOf(":")) + 1;
+        int endIndex = token.lastIndexOf("\"");
+        String substring = token.substring(beginIndex, endIndex);
+        System.out.println(substring);
+        return UUID.fromString(substring);
     }
 
 }
