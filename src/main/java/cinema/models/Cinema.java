@@ -55,6 +55,7 @@ public class Cinema {
     }
 
     public Seat returnSeat(UUID id) {
+        purchasedSeats.get(id).unreserve();
         return purchasedSeats.remove(id);
     }
 

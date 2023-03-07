@@ -32,6 +32,10 @@ public final class Seat {
         return UUID.randomUUID();
     }
 
+    public void unreserve() {
+        isReserved = false;
+    }
+
     public Integer getRow() {
         return row;
     }
