@@ -29,7 +29,6 @@ public class Controller {
     @PostMapping("/purchase")
     public Map<String, Object> purchase(@RequestBody Seat seat) {
         seat = cinemaService.getSeat(seat);
-
         if (seat.isInvalidInstance()) {
             String INVALID_SEAT = "The number of a row or a column is out of bounds!";
             return Map.of("error", INVALID_SEAT);

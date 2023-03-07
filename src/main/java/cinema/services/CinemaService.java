@@ -32,11 +32,11 @@ public class CinemaService {
     }
 
     public Integer getSeatIndex(Seat seat) {
-        return seat.getRow() * cinema.TOTAL_ROWS + seat.getColumn() - 2;
+        return (seat.getRow() - 1) * cinema.TOTAL_ROWS + seat.getColumn() - 1;
     }
 
     public Integer getSeatIndex(Integer row, Integer col) {
-        return row * cinema.TOTAL_ROWS + col - 2;
+        return (row - 1) * cinema.TOTAL_ROWS + col - 1;
     }
 
     public boolean seatIsNotPurchased(UUID id) {
