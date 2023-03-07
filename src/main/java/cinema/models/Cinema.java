@@ -3,12 +3,17 @@ package cinema.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 @JsonPropertyOrder(value = {"total_rows", "total_columns", "available_seats"})
 public class Cinema {
     @JsonProperty("total_rows")
     public final Integer TOTAL_ROWS;
     @JsonProperty("total_columns")
     public final Integer TOTAL_COLUMNS;
+    private final Map<UUID, Seat> purchasedSeats;
     @JsonProperty("available_seats")
     private final Seat[] seats;
 
@@ -16,6 +21,7 @@ public class Cinema {
         this.TOTAL_ROWS = TOTAL_ROWS;
         this.TOTAL_COLUMNS = TOTAL_COLUMNS;
         this.seats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
+        purchasedSeats = new HashMap<>();
         initializeSeats();
     }
 
@@ -40,5 +46,16 @@ public class Cinema {
         return seats;
     }
 
+    public void registerPurchase(UUID id, Seat seat) {
+        purchasedSeats.put(id, seat);
+    }
+
+    public boolean isPurchased(UUID id) {
+        return purchasedSeats.containsKey(id);
+    }
+
+    public Seat returnSeat(UUID id) {
+        return purchasedSeats.remove(id);
+    }
 
 }

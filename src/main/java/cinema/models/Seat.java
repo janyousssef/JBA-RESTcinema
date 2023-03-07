@@ -3,6 +3,7 @@ package cinema.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public final class Seat {
     private final Integer row;
@@ -26,9 +27,9 @@ public final class Seat {
         return new Seat(row, column, 8L);
     }
 
-    public Seat reserve() {
+    public UUID reserve() {
         isReserved = true;
-        return this;
+        return UUID.randomUUID();
     }
 
     public Integer getRow() {
