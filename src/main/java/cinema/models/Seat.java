@@ -44,7 +44,7 @@ public final class Seat {
         return price;
     }
 
-    //@JsonIgnore
+    @JsonIgnore
     public boolean isReserved() {
         return isReserved;
     }
