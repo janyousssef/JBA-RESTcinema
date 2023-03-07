@@ -17,7 +17,7 @@ public class CinemaService {
     public Seat getSeat(Integer row, Integer col) {
         row--;
         col--;
-        return cinema.getSeats()[row * cinema.getTOTAL_ROWS() + col];
+        return cinema.getSeats()[row * cinema.TOTAL_ROWS + col];
     }
 
     public Seat reserveSeat(Seat seat) {
@@ -25,6 +25,6 @@ public class CinemaService {
     }
 
     public Integer getSeatIndex(Seat seat) {
-        return seat.getRow() * cinema.getTOTAL_ROWS() + seat.getColumn();
+        return seat.getRow() * cinema.TOTAL_ROWS + seat.getColumn();
     }
 }

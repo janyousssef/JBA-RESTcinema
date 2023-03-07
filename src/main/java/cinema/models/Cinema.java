@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder(value = {"total_rows", "total_columns", "available_seats"})
 public class Cinema {
     @JsonProperty("total_rows")
-    private final Integer TOTAL_ROWS;
+    public final Integer TOTAL_ROWS;
     @JsonProperty("total_columns")
-    private final Integer TOTAL_COLUMNS;
+    public final Integer TOTAL_COLUMNS;
     @JsonProperty("available_seats")
     private final Seat[] seats;
 
@@ -35,9 +35,6 @@ public class Cinema {
         }
     }
 
-    public Integer getTOTAL_ROWS() {
-        return TOTAL_ROWS;
-    }
 
     public Seat[] getSeats() {
         return seats;
