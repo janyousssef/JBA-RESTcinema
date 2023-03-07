@@ -28,7 +28,7 @@ public class Controller {
     @PostMapping("/purchase")
     public ResponseEntity purchase(@RequestBody Seat seat) {
 
-        if (seat.invalidInstance())
+        if (seat.isInvalidInstance())
             return new ResponseEntity<>(new SeatPurchaseProblem(INVALID_SEAT), HttpStatus.BAD_REQUEST);
 
         seat = cinemaService.getSeat(seat.getRow(), seat.getColumn());
