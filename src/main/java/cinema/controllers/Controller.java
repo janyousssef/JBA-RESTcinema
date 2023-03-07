@@ -27,30 +27,31 @@ public class Controller {
     }
 
     @PostMapping("/purchase")
-    public Map<String, Object> purchase(@RequestBody Seat seat) {
+    public ResponseEntity<Map<String, Object>> purchase(@RequestBody Seat seat) {
         seat = cinemaService.getSeat(seat);
         if (seat.isInvalidInstance()) {
             String INVALID_SEAT = "The number of a row or a column is out of bounds!";
-            return Map.of("error", INVALID_SEAT);
+            return new ResponseEntity<>(Map.of("error", INVALID_SEAT), HttpStatus.BAD_REQUEST);
         }
 
         if (seat.isReserved()) {
             String ALREADY_PURCHASED = "The ticket has been already purchased!";
-            return Map.of("error", ALREADY_PURCHASED);
+            return new ResponseEntity<>(Map.of("error", ALREADY_PURCHASED), HttpStatus.BAD_REQUEST);
         }
 
         UUID id = cinemaService.reserveSeat(seat);
-        return Map.of("token", id, "ticket", seat);
+        return new ResponseEntity<>(Map.of("token", id, "ticket", seat), HttpStatus.OK);
 
     }
 
     @PostMapping("/return")
-    public Map<String, Object> returnSeat(@RequestBody String json) {
+    public ResponseEntity<Map<String, Object>> returnSeat(@RequestBody String json) {
         UUID id = getUUIDFromJSON(json);
 
 
-        if (cinemaService.seatIsNotPurchased(id)) return Map.of("error", "Wrong token!");
-        return Map.of("returned ticket", cinemaService.returnSeat(id));
+        if (cinemaService.seatIsNotPurchased(id))
+            return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Map<String, Object>>(Map.of("returned ticket", cinemaService.returnSeat(id)), HttpStatus.OK);
 
     }
 
