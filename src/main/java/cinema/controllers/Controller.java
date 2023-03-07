@@ -15,7 +15,7 @@ public class Controller {
     CinemaService cinemaService = new CinemaService(new Cinema(9, 9));
 
     @GetMapping("/seats")
-    public ResponseEntity<Cinema> getAllSeats() {
+    public ResponseEntity<Cinema> getCinema() {
         return new ResponseEntity<>(cinemaService.getCinema(), HttpStatus.OK);
     }
 
