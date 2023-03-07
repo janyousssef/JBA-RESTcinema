@@ -5,23 +5,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 
 public final class Seat {
-    private Integer row;
-    private Integer column;
-    private Long price;
+    private final Integer row;
+    private final Integer column;
+    private final Long price;
     private boolean isReserved;
 
-    public Seat() {
-    }
-
-    public Seat(Integer row, Integer column, Long price, boolean isReserved) {
+    public Seat(Integer row, Integer column, Long price) {
         this.row = row;
         this.column = column;
         this.price = price;
-        this.isReserved = isReserved;
+        this.isReserved = false;
     }
 
-    public Seat(Integer row, Integer column, Long price) {
-        this(row, column, price, false);
+
+    public static Seat withHighPrice(Integer row, Integer column) {
+        return new Seat(row, column, 10L);
+    }
+
+    public static Seat withLowPrice(Integer row, Integer column) {
+        return new Seat(row, column, 8L);
     }
 
     public Seat reserve() {
@@ -46,7 +48,7 @@ public final class Seat {
         return isReserved;
     }
 
-    public boolean invalidInstance() {
+    public boolean isInvalidInstance() {
         return row > 9 || column > 9 || row < 1 || column < 1;
     }
 
@@ -56,14 +58,14 @@ public final class Seat {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (Seat) obj;
         return Objects.equals(this.row, that.row) &&
-                Objects.equals(this.column, that.column) &&
-                Objects.equals(this.price, that.price) &&
-                this.isReserved == that.isReserved;
+                Objects.equals(this.column, that.column);
+
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, column, price, isReserved);
+        return Objects.hash(row, column);
     }
 
     @Override
