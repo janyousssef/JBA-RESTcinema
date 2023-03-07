@@ -6,6 +6,7 @@ import cinema.services.CinemaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 import java.util.UUID;
@@ -28,6 +29,9 @@ public class Controller {
 
     @PostMapping("/purchase")
     public ResponseEntity<Map<String, Object>> purchase(@RequestBody Seat seat) {
+        if (seat.anyNulls())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
         if (seat.isInvalidInstance()) {
             String INVALID_SEAT = "The number of a row or a column is out of bounds!";
             return new ResponseEntity<>(Map.of("error", INVALID_SEAT), HttpStatus.BAD_REQUEST);
@@ -56,7 +60,7 @@ public class Controller {
     }
 
     private UUID getUUIDFromJSON(String token) {
-        return UUID.fromString(token.substring(token.indexOf(": ") + 3, token.length() - 4));
+        return UUID.fromString(token.substring(token.indexOf(": ") + 3, token.lastIndexOf("\"")));
     }
 
 }

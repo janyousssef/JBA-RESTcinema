@@ -83,4 +83,7 @@ public final class Seat {
                 "isReserved=" + isReserved + ']';
     }
 
+    public boolean anyNulls() {
+        return this.row == null || this.column == null;
+    }
 }
