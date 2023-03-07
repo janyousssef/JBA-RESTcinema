@@ -48,6 +48,7 @@ public final class Seat {
         return isReserved;
     }
 
+    @JsonIgnore
     public boolean isInvalidInstance() {
         return row > 9 || column > 9 || row < 1 || column < 1;
     }
