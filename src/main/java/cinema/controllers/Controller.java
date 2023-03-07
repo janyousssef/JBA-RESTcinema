@@ -55,7 +55,7 @@ public class Controller {
 
         if (cinemaService.seatIsNotPurchased(id))
             return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(Map.of("returned ticket", cinemaService.returnSeat(id)), HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("returned_ticket", cinemaService.returnSeat(id)), HttpStatus.OK);
 
     }
 
@@ -63,7 +63,6 @@ public class Controller {
         int beginIndex = token.indexOf("\"", token.indexOf(":")) + 1;
         int endIndex = token.lastIndexOf("\"");
         String substring = token.substring(beginIndex, endIndex);
-        System.out.println(substring);
         return UUID.fromString(substring);
     }
 
