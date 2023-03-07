@@ -24,8 +24,9 @@ public final class Seat {
         this(row, column, price, false);
     }
 
-    public void reserve() {
+    public Seat reserve() {
         isReserved = true;
+        return this;
     }
 
     public Integer getRow() {

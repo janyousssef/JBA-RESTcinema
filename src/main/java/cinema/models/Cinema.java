@@ -10,13 +10,13 @@ public class Cinema {
     @JsonProperty("total_columns")
     private final Integer TOTAL_COLUMNS;
     @JsonProperty("available_seats")
-    private final Seat[] availableSeats;
+    private final Seat[] seats;
 
 
     public Cinema(Integer TOTAL_ROWS, Integer TOTAL_COLUMNS) {
         this.TOTAL_ROWS = TOTAL_ROWS;
         this.TOTAL_COLUMNS = TOTAL_COLUMNS;
-        this.availableSeats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
+        this.seats = new Seat[TOTAL_ROWS * TOTAL_COLUMNS];
         initializeSeats();
     }
 
@@ -28,7 +28,7 @@ public class Cinema {
                 if (row < 4) seat = new Seat(row + 1, col + 1, 10L, false);
                 else seat = new Seat(row + 1, col + 1, 8L, false);
 
-                availableSeats[row * TOTAL_ROWS + col] = seat;
+                seats[row * TOTAL_ROWS + col] = seat;
             }
         }
     }
@@ -36,11 +36,10 @@ public class Cinema {
     public Seat getSeat(Integer row, Integer col) {
         row--;
         col--;
-        return availableSeats[row * TOTAL_ROWS + col];
+        return seats[row * TOTAL_ROWS + col];
     }
 
     public Seat reserveSeat(Seat seat) {
-        seat.reserve();
-        return seat;
+        return seat.reserve();
     }
 }
