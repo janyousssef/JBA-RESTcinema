@@ -50,18 +50,23 @@ public class CinemaService {
 
     public HashMap<String, Integer> statistics() {
         HashMap<String, Integer> map = new HashMap<>();
-        Integer income = (int) cinema
+
+        Integer income = getIncome();
+        Integer numAvailableSeats = cinema.TOTAL_ROWS * cinema.TOTAL_COLUMNS - cinema.getNumberOfSoldSeats();
+
+        map.put("current_income", income);
+        map.put("number_of_purchased_tickets", cinema.getNumberOfSoldSeats());
+        map.put("number_of_available_seats", numAvailableSeats);
+
+        return map;
+    }
+
+    private int getIncome() {
+        return (int) cinema
                 .getPurchasedSeats()
                 .values()
                 .stream()
                 .mapToLong(Seat::getPrice)
                 .sum();
-
-        map.put("current_income", income);
-        map.put("number_of_purchased_tickets", cinema.getNumberOfSoldSeats());
-        Integer numAvailibleSeats = cinema.TOTAL_ROWS * cinema.TOTAL_COLUMNS - cinema.getNumberOfSoldSeats();
-        map.put("number_of_available_seats", numAvailibleSeats);
-
-        return map;
     }
 }
