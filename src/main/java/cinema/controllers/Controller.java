@@ -60,12 +60,13 @@ public class Controller {
 
     }
 
-    @GetMapping("/stats")
-    public ResponseEntity<Map<String, Integer>> statistics() {
+    @PostMapping("/stats")
+    public ResponseEntity<Map<String, Object>> statistics(@RequestParam(value = "password", required = false) String password) {
+        if (password == null || !password.equals("super_secret"))
+            return new ResponseEntity<>(Map.of("error", "The password is wrong!"), HttpStatus.valueOf(401));
 
 
-        Map<String, Integer> stats = new HashMap<>(cinemaService.statistics());
-
+        Map<String, Object> stats = new HashMap<>(cinemaService.statistics());
         return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 
