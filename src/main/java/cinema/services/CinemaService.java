@@ -3,6 +3,7 @@ package cinema.services;
 import cinema.models.Cinema;
 import cinema.models.Seat;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -45,5 +46,22 @@ public class CinemaService {
 
     public Seat returnSeat(UUID id) {
         return cinema.returnSeat(id);
+    }
+
+    public HashMap<String, Integer> statistics() {
+        HashMap<String, Integer> map = new HashMap<>();
+        Integer income = (int) cinema
+                .getPurchasedSeats()
+                .values()
+                .stream()
+                .mapToLong(Seat::getPrice)
+                .sum();
+
+        map.put("current_income", income);
+        map.put("number_of_purchased_tickets", cinema.getNumberOfSoldSeats());
+        Integer numAvailibleSeats = cinema.TOTAL_ROWS * cinema.TOTAL_COLUMNS - cinema.getNumberOfSoldSeats();
+        map.put("number_of_available_seats", numAvailibleSeats);
+
+        return map;
     }
 }

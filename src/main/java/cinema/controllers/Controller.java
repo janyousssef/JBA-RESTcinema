@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -57,6 +58,14 @@ public class Controller {
             return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(Map.of("returned_ticket", cinemaService.returnSeat(id)), HttpStatus.OK);
 
+    }
+
+    public ResponseEntity<Map<String, Integer>> statistics() {
+
+
+        Map<String, Integer> stats = new HashMap<>(cinemaService.statistics());
+
+        return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 
     private UUID getUUIDFromJSON(String token) {

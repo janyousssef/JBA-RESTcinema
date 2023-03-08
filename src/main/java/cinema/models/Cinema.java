@@ -3,6 +3,7 @@ package cinema.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -59,4 +60,11 @@ public class Cinema {
         return purchasedSeats.remove(id);
     }
 
+    public int getNumberOfSoldSeats() {
+        return purchasedSeats.size();
+    }
+
+    public Map<UUID, Seat> getPurchasedSeats() {
+        return Collections.unmodifiableMap(purchasedSeats);
+    }
 }
