@@ -55,8 +55,8 @@ public class CinemaService {
         Integer numAvailableSeats = cinema.TOTAL_ROWS * cinema.TOTAL_COLUMNS - cinema.getNumberOfSoldSeats();
 
         map.put("current_income", income);
-        map.put("number_of_purchased_tickets", cinema.getNumberOfSoldSeats());
         map.put("number_of_available_seats", numAvailableSeats);
+        map.put("number_of_purchased_tickets", cinema.getNumberOfSoldSeats());
 
         return map;
     }
