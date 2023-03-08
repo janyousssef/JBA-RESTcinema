@@ -1,5 +1,6 @@
 package cinema.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -51,6 +52,7 @@ public class Cinema {
         purchasedSeats.put(id, seat);
     }
 
+    @JsonIgnore
     public boolean isPurchased(UUID id) {
         return purchasedSeats.containsKey(id);
     }
@@ -60,10 +62,12 @@ public class Cinema {
         return purchasedSeats.remove(id);
     }
 
+    @JsonIgnore
     public int getNumberOfSoldSeats() {
         return purchasedSeats.size();
     }
 
+    @JsonIgnore
     public Map<UUID, Seat> getPurchasedSeats() {
         return Collections.unmodifiableMap(purchasedSeats);
     }
