@@ -60,7 +60,7 @@ public class Controller {
 
     }
 
-    @PostMapping("/stats")
+    @GetMapping("/stats")
     public ResponseEntity<Map<String, Integer>> statistics() {
 
 
