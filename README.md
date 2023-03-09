@@ -3,7 +3,7 @@ My implementation of the JetBrains Academy [Cinema Room REST](https://hyperskill
 
 ## Functionality
 
-The is a reservation system for cinema seats, it supports:
+The system is a reservation system for cinema seats, it supports:
  - Viewing a certain seat
  - Viewing all seats
  - Buying a seat
