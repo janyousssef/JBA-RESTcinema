@@ -1,5 +1,5 @@
 # JBA-RESTcinema
-My implementation of the JetBrains Academy REST Cinema project for Java Backend track
+My implementation of the JetBrains Academy https://hyperskill.org/projects/189?track=12 project for Java Backend track
 
 ## Functionality
 
